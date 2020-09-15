@@ -14,9 +14,3 @@ function ImgCtrl($scope, $http){
     };
     refresh().then(function() { $scope.working = false; });
 }
-let url = 'localhost:8080/cam'
-let response = await fetch(url)
-    .then(response => function(response){
-        var res = response.json()
-        document.getElementById()
-    })

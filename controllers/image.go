@@ -2,22 +2,25 @@ package controllers
 
 import(
 	"github.com/astaxie/beego"
-	// "go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/mongo"
-	// "go.mongodb.org/mongo-driver/mongo/options"
 	"myproject/models"
+	// "fmt"
+
 )
 
 type ImageController struct {
 	beego.Controller
 }
 
-func (this *ImageController) ListImg(){
-	res := struct{Images []*models.Image }{models.DefaultImageList.All()}
+func (this *ImageController) Get(){
+	res := struct{Images []*models.Image}{models.DefaultImageList.All()}
 	this.Data["json"] = res
-	this.ServeJSON()
-}
-func (this *ImageController) Get() {
-	this.TplName = "cam.html"
+	this.TplName = "index.html"
 	this.Render()
+
 }
+// func (this *ImageController) Get(){
+
+// 	res := struct{Images []*models.Image}{models.DefaultImageList.All()}
+// 	this.Data["json"] = res
+// 	this.ServeJSON()
+// }

@@ -9,6 +9,6 @@ import (
 func init() {
 
 	beego.Router("/home", &controllers.MainController{})
-	beego.Router("/cam", &controllers.ImageController{}, "get:ListImg")
-	beego.Router("/camera", &controllers.ImageController{})
+	beego.Router("/cam", &controllers.ImageController{})
+	// beego.Router("/camera", &controllers.ImageController{})
 }
