@@ -34,16 +34,15 @@
     var str;
     
 
-    for (var j = 0; j < 6; j++) {
+    for (var j = 0; j < 5; j++) {
       if (j == 0){str = "id" }
       if (j == 1){str = "direction"}
       if (j == 2){str = "line"}
-      if (j == 3){str = "evidence"}
-      if (j == 4){str = "time"}
-      if (j == 5){
+      if (j == 3){str = "time"}
+      if (j == 4){
           var cell = document.createElement("td");
           var cellE = document.createElement("img");
-          cellE.setAttribute('src',"data:image/jpg;base64,"+data["Images"][i]["data"]["Data"])
+          cellE.setAttribute('src',"data:image/jpg;base64,"+data["Images"][i]["evidence"])
           cellE.setAttribute('height',150)
           cellE.setAttribute('width', 200)
           cell.appendChild(cellE)
@@ -74,7 +73,7 @@
     
     var data = {{.json}};
     var lengthOf = Object.keys(data).length;
-    var baseStr64 = data["Images"][lengthOf - 1]["data"]["Data"];
+    var baseStr64 = data["Images"][lengthOf - 1]["evidence"];
     var tmp = document.getElementById("imgE")
     tmp.setAttribute('src',"data:image/jpg;base64,"+baseStr64);
   }
