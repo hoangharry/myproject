@@ -13,7 +13,7 @@ import(
 
 
 type Image struct {
-	ID  int `json:"id" bson:"_id"`
+	ID  int `json:"_id" bson:"_id"`
 	Direction string `json:"direction" bson:"direction"`
 	Time string `json:"time" bson:"time"`
 	Line int `json:"line" bson:"line"`

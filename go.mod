@@ -5,6 +5,7 @@ go 1.14
 require github.com/astaxie/beego v1.12.1
 
 require (
+	github.com/beego/samples v0.0.0-20180420090448-1c696ee4905b
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/satori/go.uuid v1.2.0
