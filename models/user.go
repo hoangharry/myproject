@@ -1,32 +1,34 @@
 package models
 
-import(
+import (
+	"context"
+	"fmt"
+	"log"
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"context"
-	"time"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"log"
 )
 
 type User struct {
-	Usrname string `json:"usrname" bson:"usrname"`
-	Pwd string `json:"pwd" bson:"pwd"`
-	Camera []string `json:"camera" bson:"camera"`
+	Usrname string   `json:"usrname" bson:"usrname"`
+	Pwd     string   `json:"pwd" bson:"pwd"`
+	Camera  []string `json:"cam" bson:"cam"`
 }
 
 type UserManager struct {
-	user *User
+	user   *User
 	client *mongo.Client
 }
+
 var DefaultUserManager *UserManager
 
-func NewUserManager(client *mongo.Client) *UserManager{
+func NewUserManager(client *mongo.Client) *UserManager {
 	return &UserManager{client: client}
 }
 
-func init(){
+func init() {
 	client := InitiateMongoClient()
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -41,7 +43,7 @@ func init(){
 func (m *UserManager) CheckUser(usrname string, pwd string) bool {
 	var user *User
 	user = m.GetUser(usrname)
-	if (pwd != user.Pwd){
+	if pwd != user.Pwd {
 		return false
 	}
 	m.user = user
@@ -74,9 +76,21 @@ func (m *UserManager) GetUser(usrname string) *User {
 	defer cancel()
 	var user User
 	err := collection.FindOne(ctx, bson.M{"usrname": usrname}).Decode(&user)
-	if err!= nil {
+	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
 	return &user
+}
+func (m *UserManager) GetCam(usr string) []string {
+	collection := m.client.Database("CloudCam").Collection("Users")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	var user User
+	err := collection.FindOne(ctx, bson.M{"usr": usr}).Decode(&user)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return user.Camera
 }

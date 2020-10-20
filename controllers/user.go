@@ -1,14 +1,23 @@
 package controllers
 
-import(
+import (
+	"fmt"
+	"myproject/models"
+
 	"github.com/astaxie/beego"
-	// "myproject/models"
 )
 
 type UserController struct {
 	beego.Controller
 }
 
-func (this *UserController) Post(){
-
+func (this *UserController) CheckUser() {
+	// usr := this.GetString()
+}
+func (this *UserController) GetUsrCam() {
+	usr := this.GetString("usr")
+	res := struct{ CamID []string }{models.DefaultUserManager.GetCam(usr)}
+	this.Data["json"] = res
+	fmt.Println(res)
+	this.ServeJSON()
 }
